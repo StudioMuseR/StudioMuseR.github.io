@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MuseR — London's home studio marketplace</title>
+  <meta name="description" content="MuseR connects independent musicians with home studio owners across London. Book acoustically treated spaces, instruments, and recording engineers — at prices that work for emerging artists.">
+  <meta property="og:title" content="MuseR — London's home studio marketplace">
+  <meta property="og:description" content="The studio is closer than you think. Coming soon to London.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Brand tokens ─────────────────────────────────────────── */
+    :root {
+      --esp:    #1C1008;
+      --oak:    #3D2409;
+      --mid:    #9C6B3C;
+      --terra:  #C4541A;
+      --amber:  #E8872A;
+      --cream:  #F5E6C8;
+      --border: #E0C9A0;
+      --white:  #FFFFFF;
+      --s-bg:   #EAF3DE;
+      --s-tx:   #27500A;
+      --i-bg:   #E6F1FB;
+      --i-tx:   #0C447C;
+      --t-bg:   #FAECE7;
+      --t-tx:   #712B13;
+
+      --font: 'Georgia', 'Times New Roman', serif;
+      --sans: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+      --mono: 'Courier New', monospace;
+
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--esp);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(28, 16, 8, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(224, 201, 160, 0.12);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+    }
+    .nav-links a {
+      display: block;
+      padding: 0 1.1rem;
+      height: 58px;
+      line-height: 58px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.15s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+    .nav-cta {
+      background: var(--terra);
+      color: var(--cream) !important;
+      border-radius: var(--r-sm) !important;
+      padding: 0 1.2rem !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      margin-top: 11px;
+      transition: background 0.15s !important;
+      border-bottom: none !important;
+    }
+    .nav-cta:hover { background: #a8471a !important; color: var(--cream) !important; }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    /* ── Sections shared ──────────────────────────────────────── */
+    section {
+      padding: 6rem 2rem;
+    }
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    #home {
+      background: var(--esp);
+      padding-top: 7rem;
+      padding-bottom: 5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .hero-wip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(232, 135, 42, 0.15);
+      border: 1px solid rgba(232, 135, 42, 0.3);
+      color: var(--amber);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-wip::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero-h1 {
+      font-family: var(--sans);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--cream);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--terra);
+      color: var(--cream);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--r-sm);
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: #a8471a; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--cream);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--r-sm);
+      text-decoration: none;
+      border: 1.5px solid rgba(245, 230, 200, 0.3);
+      transition: border-color 0.15s, color 0.15s;
+      cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--cream); color: var(--cream); }
+
+    /* Hero right — stats panel */
+    .hero-right {
+      background: var(--oak);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+      border: 1px solid rgba(224, 201, 160, 0.1);
+    }
+
+    .hero-stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-stat {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--r-md);
+      padding: 1rem;
+      border: 1px solid rgba(224, 201, 160, 0.08);
+    }
+    .hero-stat-n {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--amber);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-stat-d {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.4;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.5;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(224, 201, 160, 0.1);
+      font-style: italic;
+    }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────────── */
+    #how {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .how-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .how-card:hover { box-shadow: 0 4px 24px rgba(28,16,8,0.08); transform: translateY(-2px); }
+
+    .how-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .how-h {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--esp);
+      margin-bottom: 0.5rem;
+    }
+    .how-p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* Mission statement */
+    .mission-block {
+      margin-top: 3.5rem;
+      background: var(--esp);
+      border-radius: var(--r-lg);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .mission-quote {
+      font-family: var(--font);
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+      color: var(--cream);
+      line-height: 1.55;
+      font-style: italic;
+    }
+    .mission-quote strong {
+      color: var(--amber);
+      font-style: normal;
+    }
+
+    .mission-details {}
+    .mission-details h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 1rem;
+    }
+    .mission-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .mission-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+    .mission-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terra);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      margin-top: 3.5rem;
+    }
+    .stat-cell {
+      background: var(--white);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-cell-n {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--terra);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.25rem;
+    }
+    .stat-cell-l {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--esp);
+      margin-bottom: 0.25rem;
+    }
+    .stat-cell-src {
+      font-size: 0.72rem;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ── ABOUT ────────────────────────────────────────────────── */
+    #about {
+      background: var(--oak);
+    }
+
+    #about .section-eyebrow { color: var(--amber); }
+
+    .about-h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--cream);
+      letter-spacing: -0.5px;
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .about-intro {
+      font-size: 1.05rem;
+      color: var(--mid);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(224, 201, 160, 0.12);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+    }
+    .about-card-h {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .about-card-p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* Roadmap teaser */
+    .roadmap-teaser {
+      border: 1px solid rgba(224, 201, 160, 0.12);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .roadmap-header {
+      background: rgba(255,255,255,0.04);
+      padding: 1rem 1.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .roadmap-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .roadmap-item {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid rgba(224, 201, 160, 0.08);
+      border-right: 1px solid rgba(224, 201, 160, 0.08);
+    }
+    .roadmap-item:nth-child(3n) { border-right: none; }
+    .roadmap-item-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 0.5rem;
+    }
+    .roadmap-item-h {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+    .roadmap-item-p {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.4;
+    }
+
+    /* ── CONTACT ──────────────────────────────────────────────── */
+    #contact {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-left h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--esp);
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .contact-left p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-types {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contact-type {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--esp);
+    }
+    .contact-type-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .field-full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--esp);
+    }
+
+    input, select, textarea {
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      color: var(--esp);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 0.65rem 0.9rem;
+      width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--terra);
+      box-shadow: 0 0 0 3px rgba(196, 84, 26, 0.12);
+    }
+    textarea { resize: vertical; min-height: 110px; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239C6B3C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.5rem;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--terra);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: #a8471a; transform: translateY(-1px); }
+    .form-submit:active { transform: none; }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--mid);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    .form-success {
+      display: none;
+      background: var(--s-bg);
+      border: 1px solid var(--s-tx);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--s-tx);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--esp);
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(224,201,160,0.1);
+    }
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.5px;
+    }
+    .footer-logo span { color: var(--amber); }
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--mid);
+      margin-top: 2px;
+    }
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--mid);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── Mobile ───────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 58px; left: 0; right: 0; background: var(--esp); padding: 1rem 0; border-bottom: 1px solid rgba(224,201,160,0.1); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: auto; line-height: 1; padding: 0.85rem 1.5rem; border-bottom: none; }
+      .nav-cta { margin-top: 0; margin: 0.5rem 1.5rem; height: auto !important; line-height: 2.5 !important; display: block; text-align: center; }
+      .nav-hamburger { display: flex; }
+
+      section { padding: 4rem 1.25rem; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-right { display: none; }
+      #home { min-height: auto; padding-top: 5.5rem; }
+
+      .how-grid { grid-template-columns: 1fr; }
+      .mission-block { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-cell { border-right: none !important; border-bottom: 1px solid var(--border); }
+      .stat-cell:last-child { border-bottom: none; }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .roadmap-items { grid-template-columns: 1fr; }
+      .roadmap-item { border-right: none !important; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="#home" class="nav-logo">Muse<span>R</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────── -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-wip">Work in progress — coming to London</div>
+      <h1 class="hero-h1">The studio is<br>closer than<br><em>you think.</em></h1>
+      <p class="hero-sub">MuseR connects independent musicians with home studio owners across London — at prices that actually work for emerging artists. Book a space, rent gear, record with an engineer. All in one place.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch →</a>
+        <a href="#about" class="btn-ghost">Learn more</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stat-label">Why MuseR exists — the numbers</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-n">~82%</div>
+          <div class="hero-stat-d">of UK musicians don't earn a living wage from music</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">£2,500</div>
+          <div class="hero-stat-d">median annual income for independent artists</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">£30–150</div>
+          <div class="hero-stat-d">professional London studio rates per hour</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">£10–30</div>
+          <div class="hero-stat-d">MuseR target range — accessible to all</div>
+        </div>
+      </div>
+      <p class="hero-note">Sources: Musicians' Census (MU & Help Musicians, 2023), Musosoup income report (2024). MuseR pricing is a target range, not a guaranteed price.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ────────────────────────────────────────────── -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-eyebrow">What MuseR does</div>
+    <h2 style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-0.5px; color:var(--esp); margin-bottom:0.5rem;">Three ways to use a MuseR studio</h2>
+    <p style="color:var(--mid); font-size:1rem; max-width:560px; line-height:1.7; margin-bottom:0;">Home studio owners list their space, instruments, and skills. Musicians book what they need, by the hour, safely.</p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-icon">🏠</div>
+        <h3 class="how-h">Book a space</h3>
+        <p class="how-p">Acoustically treated home studios across London. Verified photos, house rules, and a calendar-based booking system. Pay only for the hours you use.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-icon">🎸</div>
+        <h3 class="how-h">Rent gear & software</h3>
+        <p class="how-p">Instruments, amps, DAWs, and plugin libraries available by the hour. Professional tools without the professional price tag.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-icon">🎛️</div>
+        <h3 class="how-h">Record with an engineer</h3>
+        <p class="how-p">Host-assisted recording sessions with local producers at transparent, agreed rates. Both parties verified. Both parties protected.</p>
+      </div>
+    </div>
+
+    <div class="mission-block">
+      <blockquote class="mission-quote">
+        "Making music costs more than most musicians earn. MuseR is built to change that — <strong>not by disrupting the industry, but by unlocking what's already there.</strong>"
+      </blockquote>
+      <div class="mission-details">
+        <h3>Platform principles</h3>
+        <ul class="mission-list">
+          <li>Every host is manually verified before any listing goes live</li>
+          <li>Every guest is ID-verified before they can browse listings</li>
+          <li>Payments are held in escrow until the session is complete</li>
+          <li>The full address is only revealed after a booking is confirmed</li>
+          <li>Blind mutual reviews keep ratings honest for both sides</li>
+          <li>MuseR never touches, owns, or monetises the music itself</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-cell-n">£8bn</div>
+        <div class="stat-cell-l">UK music industry GVA</div>
+        <div class="stat-cell-src">UK Music, This Is Music 2025 (Jan 2026)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-n">157,800</div>
+        <div class="stat-cell-l">Registered UK music creators in 2024</div>
+        <div class="stat-cell-src">UK Music, This Is Music 2025 (Jan 2026)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-n">84%</div>
+        <div class="stat-cell-l">of independent UK artists cannot afford to tour</div>
+        <div class="stat-cell-src">Ditto Music, 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow">About MuseR</div>
+    <h2 class="about-h2">Built from inside<br>the community</h2>
+    <p class="about-intro">MuseR was founded by someone who lives in London's independent music scene — not parachuted in from outside it. The problem is real. The supply exists. The gap is uncontested. We are building the platform to bridge it.</p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <h3 class="about-card-h">🎯 The mission</h3>
+        <p class="about-card-p">Remove the single biggest barrier between raw talent and a finished recording — cost. MuseR is not a luxury product. It is an access product, designed from the ground up for independent artists who are serious about their music but self-funding their career.</p>
+      </div>
+      <div class="about-card">
+        <h3 class="about-card-h">🔐 The trust model</h3>
+        <p class="about-card-p">Both sides of this marketplace are taking a risk. Guests enter a stranger's home. Hosts share expensive equipment. Every feature on MuseR — from mandatory ID verification to encrypted address storage — exists because we take that risk seriously for both parties.</p>
+      </div>
+      <div class="about-card">
+        <h3 class="about-card-h">📍 Starting in London</h3>
+        <p class="about-card-p">London is the UK's dominant music hub — and the ideal proof-of-concept city. We are beginning with a hyper-local invite-only beta in East and South London, where the density of home studios and independent artists is highest.</p>
+      </div>
+      <div class="about-card">
+        <h3 class="about-card-h">🌍 The long-term vision</h3>
+        <p class="about-card-p">MuseR starts as a studio booking platform and ends as the full infrastructure layer for independent music — globally. Artist profiles, collaboration tools, a talent marketplace. Everywhere there are musicians who need a space to create.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-teaser">
+      <div class="roadmap-header">Where we are heading — product roadmap</div>
+      <div class="roadmap-items">
+        <div class="roadmap-item">
+          <div class="roadmap-item-badge" style="background:rgba(196,84,26,.2);color:#C4541A;">Now — Months 1–3</div>
+          <div class="roadmap-item-h">Foundation</div>
+          <p class="roadmap-item-p">Building the platform. Recruiting founding hosts personally. Invite-only closed beta with 20–30 artists in London.</p>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-item-badge" style="background:rgba(59,109,17,.2);color:#3B6D11;">Soon — Months 4–12</div>
+          <div class="roadmap-item-h">London launch</div>
+          <p class="roadmap-item-p">Public registration opens. 80+ verified listings across London. First 100 completed bookings. Native iOS + Android apps begin.</p>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-item-badge" style="background:rgba(83,74,183,.2);color:#534AB7;">Future — Year 2+</div>
+          <div class="roadmap-item-h">UK + beyond</div>
+          <p class="roadmap-item-p">Manchester, Bristol, Birmingham. Mixing, mastering, and lessons marketplace. Artist profiles. Europe. Then global.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-eyebrow">Get in touch</div>
+        <h2>We'd love to<br>hear from you.</h2>
+        <p>Whether you're an independent musician looking for affordable studio time, a home studio owner interested in listing your space, an investor or advisor, or just someone who believes in making music creation more accessible — reach out.</p>
+
+        <div class="contact-types">
+          <div class="contact-type">
+            <div class="contact-type-icon" style="background:var(--t-bg);">🎵</div>
+            <span><strong>Musicians</strong> — join our waitlist for early access when we launch in London</span>
+          </div>
+          <div class="contact-type">
+            <div class="contact-type-icon" style="background:var(--s-bg);">🏠</div>
+            <span><strong>Studio owners</strong> — find out about becoming a founding host (8% permanent rate)</span>
+          </div>
+          <div class="contact-type">
+            <div class="contact-type-icon" style="background:var(--i-bg);">💼</div>
+            <span><strong>Investors & advisors</strong> — we're currently raising our pre-seed round</span>
+          </div>
+          <div class="contact-type">
+            <div class="contact-type-icon" style="background:#F1EFE8;">🤝</div>
+            <span><strong>Partners & press</strong> — collaboration and media enquiries welcome</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="contact-form">
+          <!-- 
+            FORMSPREE SETUP INSTRUCTIONS (for the website owner):
+            1. Go to formspree.io and create a free account
+            2. Create a new form — copy the form endpoint URL (looks like https://formspree.io/f/xxxxxxxx)
+            3. Replace "YOUR_FORMSPREE_ID" below with just the ID part (the xxxxxxxx bit)
+            4. That's it — submissions will go straight to your email
+          -->
+          <form id="contact-form" action="https://formspree.io/f/xrenevla" method="POST">
+            <div class="form-row">
+              <div class="field">
+                <label for="fname">First name</label>
+                <input type="text" id="fname" name="first_name" placeholder="Jordan" required>
+              </div>
+              <div class="field">
+                <label for="lname">Last name</label>
+                <input type="text" id="lname" name="last_name" placeholder="Smith" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="jordan@example.com" required>
+            </div>
+
+            <div class="field">
+              <label for="reason">I am a…</label>
+              <select id="reason" name="reason" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="musician">Musician / artist looking for a studio</option>
+                <option value="host">Home studio owner interested in listing</option>
+                <option value="investor">Investor or advisor</option>
+                <option value="press">Press or media</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us a little about yourself or what you're looking for…" required></textarea>
+            </div>
+
+            <!-- Spam honeypot — do not remove -->
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="_subject" value="New MuseR enquiry">
+
+            <button type="submit" class="form-submit">Send message →</button>
+            <p class="form-note">We read every message and aim to reply within 48 hours.</p>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">✓</div>
+            <strong>Message sent — thank you!</strong><br>
+            We'll be in touch within 48 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Muse<span>R</span></div>
+      <div class="footer-tagline">London's home studio marketplace — coming soon</div>
+    </div>
+    <div class="footer-right">
+      <div>Working codename — final brand name pending trademark clearance</div>
+      <div>© 2025 MuseR. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Mobile nav toggle ──────────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ── Contact form: Formspree AJAX submit ────────────────────────
+  const form    = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        btn.textContent = 'Send message →';
+        btn.disabled = false;
+        alert('Something went wrong — please try again or email us directly.');
+      }
+    } catch {
+      btn.textContent = 'Send message →';
+      btn.disabled = false;
+      alert('Could not send — please check your connection and try again.');
+    }
+  });
+
+  // ── Nav highlight on scroll ────────────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchs = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchs.forEach(a => {
+          a.style.color = a.getAttribute('href') === `#${entry.target.id}` ? 'var(--amber)' : '';
+          if (a.getAttribute('href') === `#${entry.target.id}`) {
+            a.style.borderBottomColor = 'var(--amber)';
+          } else {
+            a.style.borderBottomColor = '';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
